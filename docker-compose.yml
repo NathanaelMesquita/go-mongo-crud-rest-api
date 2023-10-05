@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  # Serviço do MongoDB
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - go-mongo-network
+
+  # Serviço da aplicação Go
+  go-api:
+    image: mesquitanathanael/go-api-mongo:1.0  # Use a imagem correta
+    container_name: go-api
+    ports:
+      - "9080:9080"
+    depends_on:
+      - mongodb
+    environment:
+      - MONGO_DB_HOST=mongodb
+    networks:
+      - go-mongo-network
+
+networks:
+  go-mongo-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
