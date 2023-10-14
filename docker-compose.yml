@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  # Serviço do MongoDB
+  
   mongodb:
     image: mongo
     container_name: mongodb
@@ -10,9 +10,8 @@ services:
     networks:
       - go-mongo-network
 
-  # Serviço da aplicação Go
   go-api:
-    image: mesquitanathanael/go-api-mongo:1.0  # Use a imagem correta
+    image: mesquitanathanael/go-api-mongo:1.0  
     container_name: go-api
     ports:
       - "9080:9080"
